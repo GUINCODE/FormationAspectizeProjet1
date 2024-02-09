@@ -107,6 +107,10 @@ namespace FormationAspectizeProjet1.Services
                             Microsoft.SharePoint.Client.File uploadFile = newFolder.Files.Add(fileCreationInformation);
                             ctx.Load(uploadFile);
                             ctx.ExecuteQuery();
+
+
+                            //ici on appelle la fonction permettant de stocker les metas-donnés du fichier
+
                         }
                         catch (Exception ex)
                         {
