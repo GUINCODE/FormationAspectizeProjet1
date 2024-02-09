@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Untitled</title>
+</head>
+<body>
+    <div aas-control="FileUpload">
+        
+      
+        <br />
+        <div class="row">
+            <div class="col-md-4">
+                <input name="CheckBoxMultiple" type="checkbox" /> allow multiple files
+                <br />
+                <div aas-name="Uploader" aas-type="AspectizeFileUpload"></div>
+            </div>
+            
+        </div>
+        <br />
+        <br />
+        <div class="row {DisplayNbFileUploaded}">
+            <div class="panel panel-default">
+                <div class="panel-body">
+                    <div><span>{NbFileUploaded}</span> files uploaded</div>
+                    <div>
+                        <div aas-name="GridUploadedFiles" aas-type="Bootstrap.BootstrapGrid"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br />
+       
+
+    </div>
+</body>
+</html>

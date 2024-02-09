@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+
+<body>
+
+    <div aas-control="MainControl">
+
+        <div class="container">
+            <h2>Registration Form</h2>
+            <form>
+                <div class="form-group">
+                    <label for="firstname">First Name</label>
+                    <input type="text" class="form-control" name="txtFirstname" placeholder="Enter first name">
+                </div>
+                <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input type="text" class="form-control" name="txtLastname" placeholder="Enter last name">
+                </div>
+                <button type="button" class="btn btn-primary" name="btnAddCustomer">Ajouter</button>
+            </form>
+
+            <hr />
+            <h5>{CustomerCount}</h5>
+           
+
+            <div aas-name="grdCustomers" aas-type="Bootstrap.BootstrapGrid"></div>
+
+            <hr />
+            <button type="button" class="btn btn-primary" name="btnSaveCustomers">Enregistrer</button>
+            <button type="button" class="btn btn-danger" name="btnDeleteCustomers">Delete</button>
+            <button type="button" class="btn btn-success" name="btnNaviguerVersUpload">Aller vers la page d'ajout de fichiers</button>
+            <button type="button" class="btn btn-primary" name="btnTester">Tester</button>
+        </div>
+
+    </div>
+
+
+
+</body>
+</html>

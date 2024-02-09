@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<minimalLanguageDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="Upload">
+  <diagramMoniker Id="5b10a2a8-155c-4683-80cc-5e79337cee62" />
+  <nestedChildShapes>
+    <entityShape Id="c6a8ed6a-ae33-4ff6-8340-3ee227cbe429" absoluteBounds="3.125, 1.25, 1.75, 1.0069042968750002">
+      <entityMoniker Id="1e8edd24-73d6-4b2f-b83f-eed9e09f3361" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c88d3fb7-571f-43d3-b180-3f38c439213c" absoluteBounds="3.14, 1.58, 1.7200000000000002, 0.576904296875" name="Properties" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </entityShape>
+  </nestedChildShapes>
+</minimalLanguageDiagram>

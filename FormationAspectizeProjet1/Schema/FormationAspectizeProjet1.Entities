@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<diagram xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" dslVersion="1.0.0.0" Id="87482963-a788-417e-9dc3-e5e8238dcf27" domain="FormationAspectizeProjet1" xmlns="http://schemas.microsoft.com/dsltools/EntityDesigner">
+  <entities>
+    <entity Id="7161fa21-d5f4-428c-b799-1eb0adcc696b" name="Customer" guid="6728928e-21af-470b-8a5e-db24aba84cb9" hasCustomValidators="false" hasTriggers="false">
+      <properties>
+        <entityProperty name="lastName" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="firstName" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+      </properties>
+    </entity>
+  </entities>
+</diagram>
