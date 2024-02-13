@@ -70,6 +70,8 @@ namespace FormationAspectizeProjet1.Services
                             ctx.Load(uploadFile);
                             ctx.ExecuteQuery();
 
+                            System.Diagnostics.Debug.WriteLine($"Fichier uploder sur sharepoint : {fileCreationInformation.Url}");
+
                             //ici on appelle la fonction permettant de stocker les méta-données du fichier
 
                         }
