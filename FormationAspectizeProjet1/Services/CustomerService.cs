@@ -30,7 +30,7 @@ namespace FormationAspectizeProjet1.Services
 
         DataSet ICustomerService.GetCustomers(DataSet ds)
         {
-           System.Diagnostics.Debug.WriteLine("Hello fonction GetCustomers exécutée");
+           
 
             dm.LoadEntities<Customer>();
             return dm.Data;

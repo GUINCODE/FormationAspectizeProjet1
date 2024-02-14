@@ -5,20 +5,32 @@ using Aspectize.Core;
 using System.IO;
 using System.Net;
 using System.Linq;
+using Upload;
 
 namespace FormationAspectizeProjet1.Services
 {
-    public interface IUploadShartPointFileService
+    public interface IUploadFileAndSaveMetaData
     {
-        void TeleverserFichiers(UploadedFile[] uploadedFiles);
+        bool UploadAndSave(UploadedFile[] uploadedFiles, string titreDocument, string description, string autreInfos);
     }
 
-    [Service(Name = "UploadShartPointFileService")]
-    public class UploadShartPointFileService : IUploadShartPointFileService
+    [Service(Name = "UploadFileAndSaveMetaData")]
+    public class UploadFileAndSaveMetaData : IUploadFileAndSaveMetaData //, IInitializable, ISingleton
     {
-
-        public void TeleverserFichiers(UploadedFile[] uploadedFiles)
+        public bool UploadAndSave(UploadedFile[] uploadedFiles, string titreDocument, string description, string autreInfos)
         {
+
+            var result = false;
+            result =IisCorrectDataReceived(uploadedFiles, titreDocument, description,autreInfos);
+
+            if(result == false)
+            {
+                System.Diagnostics.Debug.WriteLine("Les données ne sont pas bonnes ");
+                return false;
+            }
+
+            SaveMetaData(titreDocument, description, autreInfos);
+
             // Forcer l'utilisation de TLS 1.2
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
 
@@ -74,12 +86,15 @@ namespace FormationAspectizeProjet1.Services
 
                             //ici on appelle la fonction permettant de stocker les méta-données du fichier
 
+                            return true;
                         }
                         catch (Exception ex)
                         {
                             System.Diagnostics.Debug.WriteLine($"Erreur lors de l'upload du fichier dans SharePoint: {ex.Message}");
                             // Gérez l'erreur comme nécessaire
+                            return false;
                         }
+                        
                     }
                 }
             }
@@ -90,17 +105,86 @@ namespace FormationAspectizeProjet1.Services
                 {
                     System.Diagnostics.Debug.WriteLine($"Détails de l'erreur interne: {ex.InnerException.Message}");
                 }
+
+                return false;
             }
             catch (Exception ex)
             {
                 System.Diagnostics.Debug.WriteLine($"Exception de type Exception : {ex.Message}");
+                return false;
             }
+
+            return false;
         }
 
 
+         bool IisCorrectDataReceived(UploadedFile[] uploadedFiles, string titreDocument, string description, string autreInfos)
+        {
 
-   
-      
+            //System.Diagnostics.Debug.WriteLine($"taille tableau de fichier: {uploadedFiles.Length}");
+            // Vérifier si l'objet attributes est null
+            if (uploadedFiles == null)
+            {
+                System.Diagnostics.Debug.WriteLine($"tableau de fichier null");
+
+                return false;
+            }
+            if (uploadedFiles.Length == 0)
+            {
+                System.Diagnostics.Debug.WriteLine($"tableau de fichier vide");
+
+                return false;
+            }
+
+            if (uploadedFiles[0].Stream != null)
+            {
+                System.Diagnostics.Debug.WriteLine("le strem n'est pas null");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("le strem est pas null");
+                return false;
+
+            }
+            foreach (var file in uploadedFiles)
+            {
+                System.Diagnostics.Debug.WriteLine($"Nom de fichier: {file.Name}, Taille: {file.ContentLength} bytes");
+            }
+
+
+          
+
+            // Vérifier si les champs spécifiques sont nuls ou vides
+            bool isTitreDocumentValid = !string.IsNullOrEmpty(titreDocument);
+            bool isDescriptionDocumentValid = !string.IsNullOrEmpty(description);
+            bool isAutreInfosValid = !string.IsNullOrEmpty(autreInfos);
+
+            // Si tous les champs requis sont non nuls et non vides, retourner true
+
+            var result = isTitreDocumentValid && isDescriptionDocumentValid && isAutreInfosValid;
+            System.Diagnostics.Debug.WriteLine($"resultat est: {result}");
+            return result;
+        }
+
+         bool SaveMetaData( string titreDocument, string description, string autreInfos)
+        {
+            IDataManager dm = EntityManager.FromDataBaseService("DataService");
+            IEntityManager em = dm as IEntityManager;
+
+            var metaData = em.CreateInstance<DocumentInfo>();
+            metaData.Name = titreDocument;
+           // metaData.DateAjout = DateTime.Now; // Pour    // ou
+            metaData.DateAjout = DateTime.UtcNow; // Pour l'heure UTC
+            metaData.AutreInfos = autreInfos;
+            metaData.Description = description;
+            metaData.Taille = "100 ko";
+            metaData.Type = "PDF";
+
+            dm.SaveTransactional();
+            System.Diagnostics.Debug.WriteLine("Fonction enregistrement de meta data effectué");
+            return true;
+        }
 
     }
+
 }

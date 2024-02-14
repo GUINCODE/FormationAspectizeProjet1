@@ -124,7 +124,9 @@
       <DependentUpon>Upload.Entities</DependentUpon>
     </Compile>
     <Compile Include="Services\CustomerService.cs" />
+    <Compile Include="Services\GeneralServices.cs" />
     <Compile Include="Services\UploaderService.cs" />
+    <Compile Include="Services\UploadFileAndSaveMetaData.cs" />
     <Compile Include="Services\UploadFileToSharepoint.cs" />
   </ItemGroup>
   <ItemGroup>

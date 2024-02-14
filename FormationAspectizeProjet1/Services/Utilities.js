@@ -11,7 +11,13 @@ Global.Utilities = {
     Test: function () {
         console.log("Test function")
 
+    },
+
+    IsCorrectFileIfo: function (data) {
+        console.log("data: ", data)
     }
+
+    
 
 };
 

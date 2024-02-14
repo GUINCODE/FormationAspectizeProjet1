@@ -7,5 +7,13 @@
         <entityProperty name="firstName" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
       </properties>
     </entity>
+    <entity Id="96695147-fb8d-4d64-8943-9e2a054b09f4" name="Attributes" guid="07dd95ad-2313-41e7-8f3a-7550b14da835" hasCustomValidators="false" hasTriggers="false">
+      <properties>
+        <entityProperty name="TitreDocument" nullable="true" mustPersist="false" defaultValue="&quot;titre du doc&quot;" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="DescriptionDocument" mustPersist="false" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="AutreInfos" mustPersist="false" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="isCorrectFOrmulaire" type="Boolean" defaultValue="false" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+      </properties>
+    </entity>
   </entities>
 </diagram>

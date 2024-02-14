@@ -9,6 +9,8 @@ namespace FormationAspectizeProjet1.Services
     public interface IUploaderService
     {
         void UploadFiles(UploadedFile[] uploadedFiles);
+        DataSet SelectedFileFunction(UploadedFile[] uploadedFiles);
+
     }
 
     [Service(Name = "UploaderServiceLocal")]
@@ -58,5 +60,24 @@ namespace FormationAspectizeProjet1.Services
             }
         }
 
+        DataSet IUploaderService.SelectedFileFunction(UploadedFile[] uploadedFiles)
+        {
+            IDataManager dm = EntityManager.FromDataBaseService("DataService");
+            IEntityManager em = dm as IEntityManager;
+
+            foreach (UploadedFile uploadedFile in uploadedFiles)
+            {
+                var attachment = em.CreateInstance<FileUploaded>();
+
+                attachment.Name = uploadedFile.Name;
+                attachment.Size = uploadedFile.ContentLength;
+
+                System.Diagnostics.Debug.WriteLine($"attachemet name: {uploadedFile.Name}");
+            }
+
+            dm.SaveTransactional();
+
+            return dm.Data;
+        }
     }
 }

@@ -10,24 +10,36 @@
         <br />
         <div class="row">
             <div class="col-md-4">
-                <input name="CheckBoxMultiple" type="checkbox" /> allow multiple files
-                <br />
-                <div aas-name="Uploader" aas-type="AspectizeFileUpload"></div>
+               
+               
             </div>
-            
-        </div>
-        <br />
-        <br />
-        <div class="row {DisplayNbFileUploaded}">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    <div><span>{NbFileUploaded}</span> files uploaded</div>
-                    <div>
-                        <div aas-name="GridUploadedFiles" aas-type="Bootstrap.BootstrapGrid"></div>
+            <div class="col-md-6">
+                <form>
+                    <div class="form-group">
+                        <div aas-name="Uploader" aas-type="AspectizeFileUpload"></div>
                     </div>
-                </div>
+                    <div class="form-group">
+                        <label for="txtTitreFile">Titre</label>
+                        <input type="text" class="form-control" name="txtTitreFile" placeholder="Enter file title">
+                    </div>
+                    <div class="form-group">
+                        <label for="txtDescription">Description</label>
+                        <textarea type="text" class="form-control" name="txtDescription" placeholder="Enter description of file"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="txtAutreInfo">Autres informations</label>
+                        <textarea type="text" class="form-control" name="txtAutreInfo"></textarea>
+                    </div>
+                    
+                    <button type="button" class="btn btn-primary" name="btnAddSaveFile">Enregistrer le fichier</button>
+                </form> 
             </div>
-        </div>
+              
+
+            </div>
+        <br />
+        <br />
+        
         <br />
        
 

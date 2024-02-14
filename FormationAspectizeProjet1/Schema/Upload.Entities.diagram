@@ -8,5 +8,11 @@
         <elementListCompartment Id="c88d3fb7-571f-43d3-b180-3f38c439213c" absoluteBounds="3.14, 1.58, 1.7200000000000002, 0.576904296875" name="Properties" titleTextColor="Black" itemTextColor="Black" />
       </nestedChildShapes>
     </entityShape>
+    <entityShape Id="d0fb35a9-b79b-47c5-8e8f-3e0f72a2ecdd" absoluteBounds="5.25, 4.25, 1.75, 1.5838085937499997">
+      <entityMoniker Id="5fe72df3-d862-4e8a-a80f-b486e1a1b08f" />
+      <nestedChildShapes>
+        <elementListCompartment Id="c082920d-b90f-4d33-89ee-42ec9548f3e8" absoluteBounds="5.265, 4.58, 1.7200000000000002, 1.15380859375" name="Properties" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </entityShape>
   </nestedChildShapes>
 </minimalLanguageDiagram>

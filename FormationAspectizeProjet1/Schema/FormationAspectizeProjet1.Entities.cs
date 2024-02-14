@@ -16,6 +16,7 @@ namespace FormationAspectizeProjet1
 		public static partial class Entities
 		{
 			public const string Customer = "Customer";
+			public const string Attributes = "Attributes";
 		}
 	}
 
@@ -63,10 +64,61 @@ namespace FormationAspectizeProjet1
 			set { setValue<string>("firstName", value); }
 		}
 
-       
+	}
 
+	[DataDefinition]
+	public class Attributes : Entity, IDataWrapper
+	{
+		public static partial class Fields
+		{
+			public const string Id = "Id";
+			public const string TitreDocument = "TitreDocument";
+			public const string DescriptionDocument = "DescriptionDocument";
+			public const string AutreInfos = "AutreInfos";
+			public const string isCorrectFOrmulaire = "isCorrectFOrmulaire";
+		}
 
-    }
+		void IDataWrapper.InitData(DataRow data, string namePrefix)
+		{
+			base.InitData(data, null);
+		}
+
+		[Data(IsPrimaryKey=true)]
+		public Guid Id
+		{
+			get { return getValue<Guid>("Id"); }
+			set { setValue<Guid>("Id", value); }
+		}
+
+		[Data(DefaultValue = "titre du doc", MustPersist = false, IsNullable = true)]
+		public string TitreDocument
+		{
+			get { return getValue<string>("TitreDocument"); }
+			set { setValue<string>("TitreDocument", value); }
+		}
+
+		[Data(MustPersist = false)]
+		public string DescriptionDocument
+		{
+			get { return getValue<string>("DescriptionDocument"); }
+			set { setValue<string>("DescriptionDocument", value); }
+		}
+
+		[Data(MustPersist = false)]
+		public string AutreInfos
+		{
+			get { return getValue<string>("AutreInfos"); }
+			set { setValue<string>("AutreInfos", value); }
+		}
+
+		[Data(DefaultValue = false)]
+		public bool isCorrectFOrmulaire
+		{
+			get { return getValue<bool>("isCorrectFOrmulaire"); }
+			set { setValue<bool>("isCorrectFOrmulaire", value); }
+		}
+
+	}
 
 }
 
