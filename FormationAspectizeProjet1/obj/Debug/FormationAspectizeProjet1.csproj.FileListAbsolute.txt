@@ -17,4 +17,3 @@ C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectize
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.SharePoint.Client.WorkflowServices.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\obj\Debug\FormationAspectizeProjet1.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\obj\Debug\FormationAspectizeProjet1.pdb
-C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\obj\Debug\FormationAspectizeProjet1.csprojResolveAssemblyReference.cache

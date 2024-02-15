@@ -6,6 +6,7 @@ using System.IO;
 using System.Net;
 using System.Linq;
 using Upload;
+using System.Threading;
 
 namespace FormationAspectizeProjet1.Services
 {
@@ -17,8 +18,13 @@ namespace FormationAspectizeProjet1.Services
     [Service(Name = "UploadFileAndSaveMetaData")]
     public class UploadFileAndSaveMetaData : IUploadFileAndSaveMetaData //, IInitializable, ISingleton
     {
-        public bool UploadAndSave(UploadedFile[] uploadedFiles, string titreDocument, string description, string autreInfos)
+        int tentative = 0;
+        
+        public bool UploadAndSave(UploadedFile[] uploadedFiles, string titreDocument="null", string description="null", string autreInfos="null")
         {
+            tentative++;
+
+            System.Diagnostics.Debug.WriteLine($"Tentative N°{tentative} d'upload de fichier dans sharepoint  ");
 
             var result = false;
             result =IisCorrectDataReceived(uploadedFiles, titreDocument, description,autreInfos);
@@ -29,7 +35,7 @@ namespace FormationAspectizeProjet1.Services
                 return false;
             }
 
-            SaveMetaData(titreDocument, description, autreInfos);
+           
 
             // Forcer l'utilisation de TLS 1.2
             ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
@@ -77,22 +83,57 @@ namespace FormationAspectizeProjet1.Services
                                 Overwrite = true // Écrase le fichier s'il existe déjà
                             };
 
+
+                            // Répétez pour chaque champ, en exécutant ctx.ExecuteQuery() après chaque mise à jour
+
                             // Upload le fichier dans la bibliothèque
                             Microsoft.SharePoint.Client.File uploadFile = library.RootFolder.Files.Add(fileCreationInformation);
-                            ctx.Load(uploadFile);
-                            ctx.ExecuteQuery();
+
+                            // Important: Chargez l'objet uploadFile et ses ListItemAllFields avant d'assigner des valeurs
+                            ctx.Load(uploadFile, file => file.ListItemAllFields);
+                            ctx.ExecuteQuery(); // Exécutez la requête pour créer le fichier et charger les champs
+
+                            // Après avoir chargé l'objet, assignez les valeurs aux champs
+                            uploadFile.ListItemAllFields["TitreFichier"] = titreDocument.ToString();
+                            // Mettez à jour l'objet ListItem pour enregistrer les changements
+                            uploadFile.ListItemAllFields.Update();
+                            ctx.ExecuteQuery(); // Exécutez la requête pour appliquer les changements
+
+                            uploadFile.ListItemAllFields["DescriptionFichier"] = description.ToString();
+                            // Mettez à jour l'objet ListItem pour enregistrer les changements
+                            uploadFile.ListItemAllFields.Update();
+                            ctx.ExecuteQuery(); // Exécutez la requête pour appliquer les changements
+
+                            uploadFile.ListItemAllFields["Avis"] = autreInfos.ToString();
+                            // Mettez à jour l'objet ListItem pour enregistrer les changements
+                            uploadFile.ListItemAllFields.Update();
+                            ctx.ExecuteQuery(); // Exécutez la requête pour appliquer les changements
+
+
+
+
+
 
                             System.Diagnostics.Debug.WriteLine($"Fichier uploder sur sharepoint : {fileCreationInformation.Url}");
 
                             //ici on appelle la fonction permettant de stocker les méta-données du fichier
-
+                            SaveMetaData(titreDocument, description, autreInfos);
+                            tentative = 0;
                             return true;
                         }
                         catch (Exception ex)
                         {
-                            System.Diagnostics.Debug.WriteLine($"Erreur lors de l'upload du fichier dans SharePoint: {ex.Message}");
+                            if (tentative >= 5)
+                            {
+                                System.Diagnostics.Debug.WriteLine($"Erreur lors de l'upload du fichier dans SharePoint: {ex.Message}");
                             // Gérez l'erreur comme nécessaire
                             return false;
+                            }
+                            else
+                            {
+                                Thread.Sleep(1000);
+                                UploadAndSave(uploadedFiles, titreDocument, description, autreInfos);
+                            }
                         }
                         
                     }
@@ -100,18 +141,38 @@ namespace FormationAspectizeProjet1.Services
             }
             catch (WebException ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Une erreur est survenue: {ex.Message}");
-                if (ex.InnerException != null)
+                if(tentative >= 5)
                 {
-                    System.Diagnostics.Debug.WriteLine($"Détails de l'erreur interne: {ex.InnerException.Message}");
+                    System.Diagnostics.Debug.WriteLine($"Une erreur est survenue: {ex.Message}");
+                    if (ex.InnerException != null)
+                    {
+                        System.Diagnostics.Debug.WriteLine($"Détails de l'erreur interne: {ex.InnerException.Message}");
+                    }
+                    tentative = 0;
+                    return false;
+                }else
+                {
+                    Thread.Sleep(1000);
+                    UploadAndSave(uploadedFiles, titreDocument, description, autreInfos);
                 }
+                
 
-                return false;
+
+               
             }
             catch (Exception ex)
             {
-                System.Diagnostics.Debug.WriteLine($"Exception de type Exception : {ex.Message}");
-                return false;
+                if (tentative >= 5)
+                {
+                    System.Diagnostics.Debug.WriteLine($"Exception de type Exception : {ex.Message}");
+                    tentative = 0;
+                    return false;
+                }else
+                {
+                    Thread.Sleep(1000);
+                    UploadAndSave(uploadedFiles, titreDocument, description, autreInfos);
+                }
+                 
             }
 
             return false;
@@ -138,18 +199,18 @@ namespace FormationAspectizeProjet1.Services
 
             if (uploadedFiles[0].Stream != null)
             {
-                System.Diagnostics.Debug.WriteLine("le strem n'est pas null");
+              //  System.Diagnostics.Debug.WriteLine("le strem n'est pas null");
             }
             else
             {
-                System.Diagnostics.Debug.WriteLine("le strem est pas null");
+                System.Diagnostics.Debug.WriteLine("le strem est  null");
                 return false;
 
             }
-            foreach (var file in uploadedFiles)
-            {
-                System.Diagnostics.Debug.WriteLine($"Nom de fichier: {file.Name}, Taille: {file.ContentLength} bytes");
-            }
+           // foreach (var file in uploadedFiles)
+            //{
+              //  System.Diagnostics.Debug.WriteLine($"Nom de fichier: {file.Name}, Taille: {file.ContentLength} bytes");
+            //}
 
 
           
@@ -162,7 +223,7 @@ namespace FormationAspectizeProjet1.Services
             // Si tous les champs requis sont non nuls et non vides, retourner true
 
             var result = isTitreDocumentValid && isDescriptionDocumentValid && isAutreInfosValid;
-            System.Diagnostics.Debug.WriteLine($"resultat est: {result}");
+          //  System.Diagnostics.Debug.WriteLine($"resultat est: {result}");
             return result;
         }
 
