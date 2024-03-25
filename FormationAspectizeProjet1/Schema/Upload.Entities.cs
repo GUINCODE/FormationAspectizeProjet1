@@ -17,6 +17,7 @@ namespace Upload
 		{
 			public const string FileUploaded = "FileUploaded";
 			public const string DocumentInfo = "DocumentInfo";
+			public const string UploadedFichier = "UploadedFichier";
 		}
 	}
 
@@ -140,6 +141,60 @@ namespace Upload
 		{
 			get { return getValue<string>("AutreInfos"); }
 			set { setValue<string>("AutreInfos", value); }
+		}
+
+	}
+
+	[DataDefinition]
+	public class UploadedFichier : Entity, IDataWrapper
+	{
+		public static partial class Fields
+		{
+			public const string Id = "Id";
+			public const string Stream = "Stream";
+			public const string ContentLength = "ContentLength";
+			public const string ContentType = "ContentType";
+			public const string Name = "Name";
+		}
+
+		void IDataWrapper.InitData(DataRow data, string namePrefix)
+		{
+			base.InitData(data, null);
+		}
+
+		[Data(IsPrimaryKey=true)]
+		public Guid Id
+		{
+			get { return getValue<Guid>("Id"); }
+			set { setValue<Guid>("Id", value); }
+		}
+
+		[Data]
+		public byte[] Stream
+		{
+			get { return getValue<byte[]>("Stream"); }
+			set { setValue<byte[]>("Stream", value); }
+		}
+
+		[Data]
+		public decimal ContentLength
+		{
+			get { return getValue<decimal>("ContentLength"); }
+			set { setValue<decimal>("ContentLength", value); }
+		}
+
+		[Data]
+		public string ContentType
+		{
+			get { return getValue<string>("ContentType"); }
+			set { setValue<string>("ContentType", value); }
+		}
+
+		[Data]
+		public string Name
+		{
+			get { return getValue<string>("Name"); }
+			set { setValue<string>("Name", value); }
 		}
 
 	}

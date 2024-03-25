@@ -6,7 +6,6 @@ vUpload.Uploader.ToolTip.BindData("Select a file to upload"); // Infobulle du bo
 //pload.Uploader.OnFileSelected.BindCommand(aas.Services.Server.UploaderServiceLocal.UploadFiles(vUpload.Uploader.SelectedFile), aas.Data.UploadData, true, true);
 //vUpload.Uploader.OnFileSelected.BindCommand(aas.Services.Server.UploadShartPointFileService.TeleverserFichiers(vUpload.Uploader.SelectedFile), aas.Data.UploadData, true, true);
 
-//vUpload.Uploader.OnFileSelected.BindCommand(aas.Services.Server.UploaderServiceLocal.SelectedFileFunction(vUpload.Uploader.SelectedFile), aas.Data.UploadData, true, true);
 
 //binder les champs du formulaire
 vUpload.txtTitreFile.value.BindData(aas.Data.MainData.Attributes.TitreDocument);
@@ -16,8 +15,11 @@ vUpload.txtAutreInfo.value.BindData(aas.Data.MainData.Attributes.AutreInfos);
 
 //executé l'enregsitrement de fichier.
 //
-//vUpload.btnAddSaveFile.click.BindCommand(aas.Services.Server.GeneralServices.IsCorrectInfoFile(vUpload.Uploader.SelectedFile, vUpload.txtTitreFile.value, vUpload.txtDescription.value, vUpload.txtAutreInfo.value), aas.Data.MainData, true, true);
+
+vUpload.Uploader.OnFileSelected.BindCommand(aas.Services.Server.UploaderServiceLocal.SelectedFileFunction(vUpload.Uploader.SelectedFile), aas.Data.UploadData, true, true);
 
 
-vUpload.btnAddSaveFile.click.BindCommand(aas.Services.Server.UploadFileAndSaveMetaData.UploadAndSave(vUpload.Uploader.SelectedFile, vUpload.txtTitreFile.value, vUpload.txtDescription.value, vUpload.txtAutreInfo.value), aas.Data.MainData, true, true);
+//vUpload.btnAddSaveFile.click.BindCommand(aas.Services.Server.UploadFileAndSaveMetaData.UploadAndSave(aas.Data.UploadData.UploadedFichier, vUpload.txtTitreFile.value, vUpload.txtDescription.value, vUpload.txtAutreInfo.value), aas.Data.MainData, true, true);
+vUpload.btnAddSaveFile.click.BindCommand(aas.Services.Browser.Utilities.UplodFile(aas.Data.UploadData.UploadedFichier, vUpload.txtTitreFile.value, vUpload.txtDescription.value, vUpload.txtAutreInfo.value));
 
+vUpload.btnSendMail.click.BindCommand(aas.Services.Server.EmailService.SendMail("barrybagata96@gmail.com", "Aguibou Gn coder", "Test envoi mail", "Content MailJet"));

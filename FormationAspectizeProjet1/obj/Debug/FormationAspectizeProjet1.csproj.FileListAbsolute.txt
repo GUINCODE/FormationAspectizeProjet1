@@ -1,6 +1,7 @@
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\FormationAspectizeProjet1.dll.config
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\FormationAspectizeProjet1.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\FormationAspectizeProjet1.pdb
+C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Mailjet.Client.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.Office.Client.Policy.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.Office.Client.TranslationServices.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.Office.SharePoint.Tools.dll
@@ -15,5 +16,9 @@ C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectize
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.SharePoint.Client.Taxonomy.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.SharePoint.Client.UserProfiles.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Microsoft.SharePoint.Client.WorkflowServices.dll
+C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Newtonsoft.Json.dll
+C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\System.Runtime.InteropServices.RuntimeInformation.dll
+C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\bin\Newtonsoft.Json.xml
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\obj\Debug\FormationAspectizeProjet1.dll
 C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\obj\Debug\FormationAspectizeProjet1.pdb
+C:\Users\barry\onedrive\documents\visual studio 2015\Projects\FormationAspectizeProjet1\FormationAspectizeProjet1\obj\Debug\FormationAspectizeProjet1.csprojResolveAssemblyReference.cache

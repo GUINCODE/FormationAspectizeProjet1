@@ -18,5 +18,13 @@
         <entityProperty name="AutreInfos" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
       </properties>
     </entity>
+    <entity Id="cb6bbef0-4bdd-489d-b431-7ad2b1ede7db" name="UploadedFichier" guid="ca755267-6974-4738-9a11-e16392a125e1" hasCustomValidators="false" hasTriggers="false">
+      <properties>
+        <entityProperty name="Stream" type="ByteArray" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="ContentLength" type="Decimal" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="ContentType" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+        <entityProperty name="Name" identity="false" isEnumType="false" isCompoType="false" isExternType="false" isEnumInBaseType="false" />
+      </properties>
+    </entity>
   </entities>
 </diagram>

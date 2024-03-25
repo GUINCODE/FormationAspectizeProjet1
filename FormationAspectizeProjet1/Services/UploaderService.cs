@@ -67,17 +67,40 @@ namespace FormationAspectizeProjet1.Services
 
             foreach (UploadedFile uploadedFile in uploadedFiles)
             {
-                var attachment = em.CreateInstance<FileUploaded>();
+                var attachment = em.CreateInstance<UploadedFichier>();
 
                 attachment.Name = uploadedFile.Name;
-                attachment.Size = uploadedFile.ContentLength;
+                attachment.ContentLength = uploadedFile.ContentLength;
+                attachment.ContentType = uploadedFile.ContentType;
+                attachment.Stream = StreamToArrayByte(uploadedFile.Stream);
 
                 System.Diagnostics.Debug.WriteLine($"attachemet name: {uploadedFile.Name}");
             }
 
-            dm.SaveTransactional();
+            dm.Data.AcceptChanges();
 
             return dm.Data;
+        }
+
+
+
+        public static byte[] StreamToArrayByte(Stream stream)
+        {
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+
+            // Si le stream supporte la recherche, nous nous assurons qu'il est positionné au début.
+            if (stream.CanSeek)
+            {
+                stream.Seek(0, SeekOrigin.Begin);
+            }
+
+            // Crée un BinaryReader pour lire les bytes du stream.
+            using (var binaryReader = new BinaryReader(stream))
+            {
+                byte[] bytes = binaryReader.ReadBytes((int)stream.Length);
+                return bytes;
+            }
         }
     }
 }
